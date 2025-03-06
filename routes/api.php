@@ -34,11 +34,12 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('logout', [AuthController::class, 'logout']);
 
     //user-info
-    Route::post('user-info', [UserInfoController::class, 'store']); // New data
-    Route::put('user-info', [UserInfoController::class, 'update']); // data update
+    Route::post('user-info', [UserInfoController::class, 'store']);
+    Route::put('user-info', [UserInfoController::class, 'update']);
 
     //user-weekly-foods
     Route::resource('user-weekly-foods', UserWeeklyFoodsController::class);
+    Route::put('user-weekly-foods/{id}', [UserWeeklyFoodsController::class, 'update']);
 
     //user-weekly-workouts
     Route::resource('user-weekly-workouts', UserWeeklyWorkoutController::class);
