@@ -20,4 +20,10 @@ class Workout extends Model
         'description',
         'equipment',
     ];
+
+    // 1 -> N
+    public function userWeeklyWorkouts()
+    {
+        return $this->hasMany(UserWeeklyWorkout::class,);
+    }
 }

@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
-class UserWeeklyWorkoutContoller extends BaseController
+class UserWeeklyWorkoutController extends BaseController
 {
     public function index()
     {
