@@ -34,36 +34,33 @@ class UserInfoController extends BaseController
 
 
     // Update the user's info
-
     public function update(Request $request, $id)
     {
-        // Felhasználó adatainak keresése
-        $userInfo = UserInfo::find($id);
-        if (is_null($userInfo)) {
-            return $this->sendError('Nem található ilyen adat!', [], 404);
-        }
+        // Try to find the user's info or return a 404 if not found
+        $userInfo = UserInfo::findOrFail($id);  // Automatically handles the 404
 
-        // Bejövő adatok validálása
-        $input = $request->all();
-        $validator = Validator::make($input, [
-            'height' => 'nullable|regex:/^\d+(\.\d{1,2})?$/',
-            'weight' => 'nullable|regex:/^\d+(\.\d{1,2})?$/',
+        // Validate incoming data
+        $validator = Validator::make($request->all(), [
+            'height' => 'nullable|numeric|min:0',  // Ensure height is a number and positive if present
+            'weight' => 'nullable|numeric|min:0',  // Ensure weight is a number and positive if present
         ]);
 
         if ($validator->fails()) {
             return $this->sendError('Érvénytelen adatok.', $validator->errors()->all(), 400);
         }
 
-        // Csak a megadott mezők frissítése
-        if (isset($input['height'])) {
-            $userInfo->height = $input['height'];
+        // Only update the fields provided in the request
+        if ($request->has('height')) {
+            $userInfo->height = $request->input('height');
         }
-        if (isset($input['weight'])) {
-            $userInfo->weight = $input['weight'];
+        if ($request->has('weight')) {
+            $userInfo->weight = $request->input('weight');
         }
+
+        // Save updated user info
         $userInfo->save();
 
-        // Válasz küldése
+        // Send success response
         return $this->sendResponse($userInfo, 'Adatok sikeresen frissítve!');
     }
 }
