@@ -9,13 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class UserInfoController extends BaseController
 {
-    // Show current user's info
-    public function index()
-    {
-        $userInfo = UserInfo::all();
-        return $this->sendResponse($userInfo, 'Adatok elküldve');
-    }
-
+    // Post the user's info
     public function store(Request $request)
     {
         $user = Auth::user();
@@ -25,19 +19,21 @@ class UserInfoController extends BaseController
             'weight' => 'required|regex:/^\d+(\.\d{1,2})?$/',
         ]);
         if ($validator->fails()) {
-            return $this->sendError($validator->errors(), [], 400);
+            return $this->sendError('Érvénytelen adatok.', $validator->errors(), 400);
         }
         $input['user_id'] = $user->id;
         $userInfo = UserInfo::create($input);
         return $this->sendResponse($userInfo, 'Adatok sikeresen elküldve!', 201);
     }
 
-
     // Update the user's info
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        // Try to find the user's info or return a 404 if not found
-        $userInfo = UserInfo::findOrFail($id);  // Automatically handles the 404
+        // The logged in user's data is retrieved from the token
+        $user = auth()->user();
+
+        // The logged in user's info record
+        $userInfo = UserInfo::where('user_id', $user->id)->firstOrFail();
 
         // Validate incoming data
         $validator = Validator::make($request->all(), [
@@ -46,19 +42,11 @@ class UserInfoController extends BaseController
         ]);
 
         if ($validator->fails()) {
-            return $this->sendError('Érvénytelen adatok.', $validator->errors()->all(), 400);
+            return $this->sendError('Érvénytelen adatok.', $validator->errors(), 400);
         }
 
-        // Only update the fields provided in the request
-        if ($request->has('height')) {
-            $userInfo->height = $request->input('height');
-        }
-        if ($request->has('weight')) {
-            $userInfo->weight = $request->input('weight');
-        }
-
-        // Save updated user info
-        $userInfo->save();
+        // Update only the fields provided in the request
+        $userInfo->update($request->only(['height', 'weight']));
 
         // Send success response
         return $this->sendResponse($userInfo, 'Adatok sikeresen frissítve!');

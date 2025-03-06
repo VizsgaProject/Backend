@@ -34,8 +34,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('logout', [AuthController::class, 'logout']);
 
     //user-info
-    Route::resource('user-info',UserInfoController::class, ['execpt' => 'index']);
-    Route::resource('user-info', UserInfoController::class, ['only' => ['update']]);
+    Route::post('user-info', [UserInfoController::class, 'store']); // New data
+    Route::put('user-info', [UserInfoController::class, 'update']); // data update
 
     //user-weekly-foods
     Route::resource('user-weekly-foods', UserWeeklyFoodsController::class);
