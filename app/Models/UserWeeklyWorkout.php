@@ -15,7 +15,7 @@ class UserWeeklyWorkout extends Model
 
     protected $fillable = [
         'user_id',
-        'workout_id',
+        'workouts_id',
         'dayOfWeek',
         'reps',
         'sets',
