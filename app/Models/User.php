@@ -59,4 +59,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(UserWeeklyFood::class);
     }
+
+    public function userWeeklyWorkout()
+    {
+        return $this->hasMany(UserWeeklyWorkout::class);
+    }
 }
