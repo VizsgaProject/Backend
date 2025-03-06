@@ -35,7 +35,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     //user-info
     Route::resource('user-info',UserInfoController::class, ['execpt' => 'index']);
-    Route::resource('user-info-update', UserInfoController::class);
+    Route::resource('user-info-update', UserInfoController::class, 'update');
 
     //user-weekly-foods
     Route::resource('user-weekly-foods', UserWeeklyFoodsController::class);
