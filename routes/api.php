@@ -40,6 +40,7 @@ Route::middleware('auth:sanctum')->group(function () {
     //user-weekly-foods
     Route::resource('user-weekly-foods', UserWeeklyFoodsController::class);
     Route::put('user-weekly-foods/{id}', [UserWeeklyFoodsController::class, 'update']);
+    Route::delete('user-weekly-foods/{id}', [UserWeeklyFoodsController::class, 'destroy']);
 
     //user-weekly-workouts
     Route::resource('user-weekly-workouts', UserWeeklyWorkoutController::class);

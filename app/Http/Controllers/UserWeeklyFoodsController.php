@@ -70,6 +70,18 @@ class UserWeeklyFoodsController extends BaseController
         // Update only the fields provided in the request
         $userWeeklyFood->update($request->only(['foods_id', 'date', 'dayOfWeek', 'mealType', 'time', 'quantity', 'dailyCalorieTarget', 'dailyProteinTarget']));
         return $this->sendResponse($userWeeklyFood, 'Adatok sikeresen frissítve!');
+    }
 
+    //Delete User Weekly Food
+    public function destroy($id)
+    {
+        $user = Auth::user();
+
+        //The logged in user's user weekly food record
+        $userWeeklyFood = UserWeeklyFood::where('user_id', $user->id)->where('id', $id)->firstOrFail();
+
+        // Delete the user weekly food record
+        $userWeeklyFood->delete();
+        return $this->sendResponse([], 'Adatok sikeresen törölve!');
     }
 }
