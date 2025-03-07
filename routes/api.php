@@ -34,15 +34,19 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('logout', [AuthController::class, 'logout']);
 
     //user-info
-    Route::post('user-info', [UserInfoController::class, 'store']);
-    Route::put('user-info', [UserInfoController::class, 'update']);
+    Route::post('user-info', [UserInfoController::class]); //post
+    Route::get('user-info', [UserInfoController::class, 'index']); //get
+    Route::put('user-info', [UserInfoController::class, 'update']); //update
 
     //user-weekly-foods
-    Route::resource('user-weekly-foods', UserWeeklyFoodsController::class);
-    Route::put('user-weekly-foods/{id}', [UserWeeklyFoodsController::class, 'update']);
-    Route::delete('user-weekly-foods/{id}', [UserWeeklyFoodsController::class, 'destroy']);
+    Route::resource('user-weekly-foods', UserWeeklyFoodsController::class); //post
+    Route::get('user-weekly-foods', [UserWeeklyFoodsController::class, 'index']); //get all
+    Route::put('user-weekly-foods/{id}', [UserWeeklyFoodsController::class, 'update']); //update
+    Route::delete('user-weekly-foods/{id}', [UserWeeklyFoodsController::class, 'destroy']); //delete
 
     //user-weekly-workouts
-    Route::resource('user-weekly-workouts', UserWeeklyWorkoutController::class);
+    Route::resource('user-weekly-workouts', UserWeeklyWorkoutController::class); //post
+    Route::get('user-weekly-workouts', [UserWeeklyWorkoutController::class, 'index']); //get all
+    Route::put('user-weekly-workouts/{id}', [UserWeeklyWorkoutController::class, 'update']); //update
+    Route::delete('user-weekly-workouts/{id}', [UserWeeklyWorkoutController::class, 'destroy']); //delete
 });
-
