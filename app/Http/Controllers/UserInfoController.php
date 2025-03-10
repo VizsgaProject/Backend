@@ -57,18 +57,21 @@ class UserInfoController extends BaseController
         $userInfo = UserInfo::where('user_id', $user->id)->firstOrFail();
 
         // Validate incoming data
-        $validator = Validator::make($request->all(), [
-            'height' => 'nullable|regex:/^\d+(\.\d{1,2})?$/|min:50|max:250',
-            'weight' => 'nullable|regex:/^\d+(\.\d{1,2})?$/|min:30|max:300',
-        ],
-         [
-            'height.regex' => 'A magasság formátuma érvénytelen. Példa: 170 vagy 170.5.',
-            'height.min' => 'A magasság nem lehet kisebb, mint 50 cm.',
-            'height.max' => 'A magasság nem lehet nagyobb, mint 250 cm.',
-            'weight.regex' => 'A súly formátuma érvénytelen. Példa: 70 vagy 70.25.',
-            'weight.min' => 'A súly nem lehet kisebb, mint 30 kg.',
-            'weight.max' => 'A súly nem lehet nagyobb, mint 300 kg.',
-        ]);
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'height' => 'nullable|regex:/^\d+(\.\d{1,2})?$/|min:50|max:250',
+                'weight' => 'nullable|regex:/^\d+(\.\d{1,2})?$/|min:30|max:300',
+            ],
+            [
+                'height.regex' => 'A magasság formátuma érvénytelen. Példa: 170 vagy 170.5.',
+                'height.min' => 'A magasság nem lehet kisebb, mint 50 cm.',
+                'height.max' => 'A magasság nem lehet nagyobb, mint 250 cm.',
+                'weight.regex' => 'A súly formátuma érvénytelen. Példa: 70 vagy 70.25.',
+                'weight.min' => 'A súly nem lehet kisebb, mint 30 kg.',
+                'weight.max' => 'A súly nem lehet nagyobb, mint 300 kg.',
+            ]
+        );
 
         if ($validator->fails()) {
             return $this->sendError('Érvénytelen adatok.', $validator->errors(), 400);
