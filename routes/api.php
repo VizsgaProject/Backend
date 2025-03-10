@@ -7,6 +7,8 @@ use App\Http\Controllers\WorkoutController;
 use App\Http\Controllers\UserInfoController;
 use App\Http\Controllers\UserWeeklyFoodsController;
 use App\Http\Controllers\UserWeeklyWorkoutController;
+use App\Http\Controllers\ResetPasswordController;
+use App\Http\Controllers\ForgotPasswordController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -15,8 +17,14 @@ use Illuminate\Support\Facades\Route;
 // })->middleware('auth:sanctum');
 
 // api/
+// Public routes (no authentication required)
 Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
+
+// Password Reset Routes
+Route::post('password/reset', [ResetPasswordController::class, 'reset']);
+Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail']);
+
 
 Route::get('foods', [FoodController::class, 'foods']);
 Route::get('foods/{type}', [FoodController::class, 'food']);
@@ -24,29 +32,23 @@ Route::get('foods/{type}', [FoodController::class, 'food']);
 Route::get('workouts', [WorkoutController::class, 'workouts']);
 Route::get('workouts/{musclegroup}', [WorkoutController::class, 'workout']);
 
+// Any route that doesn't require authentication can be caught here
 Route::any('have-to-login', function () {
-    // return response()->json('Bejelentkezés szükséges',401);
-    $bc = new BaseController();
-    return $bc->sendError('Bejelentkezés szükséges', '', 401);
+    return response()->json('Bejelentkezés szükséges', 401);
 });
 
+// Protected routes (require authentication via Sanctum)
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('logout', [AuthController::class, 'logout']);
 
-    //user-info
-    Route::post('user-info', [UserInfoController::class]); //post
-    Route::get('user-info', [UserInfoController::class, 'index']); //get
-    Route::put('user-info', [UserInfoController::class, 'update']); //update
+    // User Info Routes
+    Route::get('user-info', [UserInfoController::class, 'index']); // GET - retrieve user info
+    Route::post('user-info', [UserInfoController::class, 'store']); // POST - store user info
+    Route::put('user-info', [UserInfoController::class, 'update']); // PUT - update user info
 
-    //user-weekly-foods
-    Route::resource('user-weekly-foods', UserWeeklyFoodsController::class); //post
-    Route::get('user-weekly-foods', [UserWeeklyFoodsController::class, 'index']); //get all
-    Route::put('user-weekly-foods/{id}', [UserWeeklyFoodsController::class, 'update']); //update
-    Route::delete('user-weekly-foods/{id}', [UserWeeklyFoodsController::class, 'destroy']); //delete
+    // Weekly Foods Routes
+    Route::resource('user-weekly-foods', UserWeeklyFoodsController::class)->except(['create', 'edit']); // Automatically generates routes for index, store, update, destroy
 
-    //user-weekly-workouts
-    Route::resource('user-weekly-workouts', UserWeeklyWorkoutController::class); //post
-    Route::get('user-weekly-workouts', [UserWeeklyWorkoutController::class, 'index']); //get all
-    Route::put('user-weekly-workouts/{id}', [UserWeeklyWorkoutController::class, 'update']); //update
-    Route::delete('user-weekly-workouts/{id}', [UserWeeklyWorkoutController::class, 'destroy']); //delete
+    // Weekly Workouts Routes
+    Route::resource('user-weekly-workouts', UserWeeklyWorkoutController::class)->except(['create', 'edit']); // Automatically generates routes for index, store, update, destroy
 });
