@@ -9,6 +9,7 @@ use App\Http\Controllers\UserWeeklyFoodsController;
 use App\Http\Controllers\UserWeeklyWorkoutController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\ForgotPasswordController;
+use App\Http\Controllers\SendMailController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,16 +22,13 @@ use Illuminate\Support\Facades\Route;
 Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
 
-// Password Reset Routes
-Route::post('password/reset', [ResetPasswordController::class, 'reset']);
-Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail']);
-
-
 Route::get('foods', [FoodController::class, 'foods']);
 Route::get('foods/{type}', [FoodController::class, 'food']);
 
 Route::get('workouts', [WorkoutController::class, 'workouts']);
 Route::get('workouts/{musclegroup}', [WorkoutController::class, 'workout']);
+
+Route::get('reset-password', [SendMailController::class, 'sendMail']);
 
 // Any route that doesn't require authentication can be caught here
 Route::any('have-to-login', function () {
