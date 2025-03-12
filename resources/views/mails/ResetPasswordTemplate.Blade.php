@@ -7,56 +7,73 @@
     <title>Jelszó visszaállítása</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            font-family: 'Arial', sans-serif;
+            background-color: white;
             margin: 0;
             padding: 0;
+            color: white;
         }
 
         .container {
             max-width: 600px;
             margin: 50px auto;
-            background-color: #ffffff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: #1C1C1C;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         .header {
             text-align: center;
-            padding: 10px 0;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e2e8f0;
         }
 
         .header h1 {
             margin: 0;
-            color: #333333;
+            font-size: 24px;
+            color: white;
         }
 
         .content {
             margin: 20px 0;
+            line-height: 1.6;
+            text-align: center;
         }
 
         .content p {
-            line-height: 1.6;
-            color: #666666;
+            margin: 15px 0;
+            color: white;
         }
 
         .button {
-            display: block;
-            width: 200px;
-            margin: 20px auto;
-            padding: 10px 0;
-            text-align: center;
-            background-color: #007bff;
+            display: inline-block;
+            margin: 20px 0;
+            padding: 12px 24px;
+            background-color: #00ADB5;
             color: #ffffff;
             text-decoration: none;
-            border-radius: 5px;
+            border-radius: 6px;
+            font-size: 16px;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #009299;
         }
 
         .footer {
             text-align: center;
             margin-top: 20px;
-            color: #999999;
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
+            color: white;
+            font-size: 14px;
+        }
+
+        .footer p {
+            margin: 0;
         }
     </style>
 </head>
@@ -67,12 +84,12 @@
             <h1>Jelszó visszaállítása</h1>
         </div>
         <div class="content">
-            <p>Üdv,</p>
+            <p>Üdvözöljük!</p>
             <p>Ezt az e-mailt azért kapta, mert jelszó-visszaállítási kérelmet kaptunk az Ön fiókjához.</p>
             <p>Kattintson az alábbi gombra a jelszó visszaállításához:</p>
             <a href="http://localhost:8000/api/foods" class="button">Jelszó visszaállítása</a>
-            <p>Ha nem Ön kérte a jelszó visszaállítását, nincs további teendője.</p>
-            <p>Köszönjük,<br>A Csapat</p>
+            <p>Ha nem Ön kérte a jelszó visszaállítását, kérjük, hagyja figyelmen kívül ezt az e-mailt.</p>
+            <p>Köszönjük,<br><strong>A Csapat</strong></p>
         </div>
         <div class="footer">
             <p>&copy; {{ date('Y') }} Az Ön cége. Minden jog fenntartva.</p>
