@@ -8,7 +8,7 @@
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background-color: white;
+            background-color: #1C1C1C;
             margin: 0;
             padding: 0;
             color: white;
@@ -100,10 +100,10 @@
             <p>Kattintson az alábbi gombra a jelszó visszaállításához:</p>
             <a href="{{ route('reset.password', ['token' => $mailData['token']]) }}" class="button">Jelszó visszaállítása</a>
             <p>Ha nem Ön kérte a jelszó visszaállítását, kérjük, hagyja figyelmen kívül ezt az e-mailt.</p>
-            <p>Köszönjük,<br><strong>A Csapat</strong></p>
+            <p>Köszönjük,<br><strong>A LifeSport Csapat</strong></p>
         </div>
         <div class="footer">
-            <p>&copy; {{ date('Y') }} Az Ön cége. Minden jog fenntartva.</p>
+            <p>&copy; {{ date('Y') }} LifeSport. Minden jog fenntartva.</p>
         </div>
     </div>
 </body>

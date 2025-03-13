@@ -6,6 +6,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\WelcomeEmail;
 use App\Models\Foods;
 
 class AuthController extends BaseController
@@ -47,9 +49,10 @@ class AuthController extends BaseController
 
         $input = $request->all();
         $input['password'] = bcrypt($input['password']);
-        // dd($input);
+
         $user = User::create($input);
-        // dd($user);
+
+        Mail::to($user->email)->send(new WelcomeEmail($user));
 
         $response = [
             'name' => $user->name,

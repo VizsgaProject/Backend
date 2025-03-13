@@ -21,43 +21,47 @@
         h1 {
             text-align: center;
             color: #00ADB5;
-            margin-bottom: 20px;
-            font-size: 2rem;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
         }
 
         form {
             width: 100%;
             max-width: 400px;
+            /* Az űrlap szélessége változatlan */
         }
 
         div {
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
         label {
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
             font-weight: bold;
-            color: white;
+            color: #E0E0E0;
         }
 
         input {
-            padding: 10px;
-            width: 100%;
+            height: 40px;
+            width: 125%;
+            /* Az input mezők hosszabbak */
             border: 1px solid #333;
             border-radius: 5px;
             background-color: #1E1E1E;
             color: #E0E0E0;
             font-size: 1rem;
+            transition: border-color 0.3s ease;
         }
 
         input:focus {
             border-color: #00ADB5;
             outline: none;
+            box-shadow: 0 0 5px rgba(0, 173, 181, 0.5);
         }
 
         button {
-            padding: 10px 20px;
+            padding: 12px 24px;
             background-color: #00ADB5;
             color: white;
             border: none;
@@ -65,7 +69,9 @@
             cursor: pointer;
             font-size: 1rem;
             display: block;
-            margin: 0 auto;
+            margin: 20px auto 0;
+            transition: background-color 0.3s ease;
+            justify-content: center;
         }
 
         button:hover {
@@ -74,11 +80,11 @@
 
         .container {
             background-color: #1E1E1E;
-            padding: 20px;
+            padding: 30px;
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
             width: 100%;
-            max-width: 400px;
+            max-width: 500px;
         }
 
         .error-message {
@@ -86,18 +92,27 @@
             text-align: center;
             margin-bottom: 20px;
             font-weight: bold;
+            font-size: 1.1rem;
+            padding: 10px;
+            background-color: #2E2E2E;
+            border-radius: 5px;
+            border: 1px solid #FF6B6B;
+        }
+
+        .center {
+            margin-left: 120px;
         }
     </style>
 </head>
 
 <body>
-    <div class="container">
+    <div class="container center">
         <h1>Jelszó Visszaállítás</h1>
 
         @if (session('error'))
-            <div class="error-message">
-                {{ session('error') }}
-            </div>
+        <div class="error-message">
+            {{ session('error') }}
+        </div>
         @endif
 
         <form action="{{ route('update.password') }}" method="POST">
@@ -115,7 +130,9 @@
                 <label for="password_confirmation">Jelszó Megerősítése:</label>
                 <input type="password" name="password_confirmation" id="password_confirmation" required>
             </div>
-            <button type="submit">Jelszó Visszaállítása</button>
+            <div class="center">
+                <button type="submit">Jelszó Visszaállítása</button>
+            </div>
         </form>
     </div>
 </body>
