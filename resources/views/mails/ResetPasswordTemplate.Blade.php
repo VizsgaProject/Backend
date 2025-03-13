@@ -98,7 +98,7 @@
             <p>Üdvözöljük, {{ $mailData['user'] }}!</p>
             <p>Ezt az e-mailt azért kapta, mert jelszó-visszaállítási kérelmet kaptunk az Ön fiókjához.</p>
             <p>Kattintson az alábbi gombra a jelszó visszaállításához:</p>
-            <a href="{{ route('reset.password', ['token' => $resetUrl]) }}" class="button">Jelszó visszaállítása</a>
+            <a href="{{ route('reset.password', ['token' => $mailData['token']]) }}" class="button">Jelszó visszaállítása</a>
             <p>Ha nem Ön kérte a jelszó visszaállítását, kérjük, hagyja figyelmen kívül ezt az e-mailt.</p>
             <p>Köszönjük,<br><strong>A Csapat</strong></p>
         </div>

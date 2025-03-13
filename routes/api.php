@@ -22,9 +22,14 @@ Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
 
 //reset password
+// Send reset password link
 Route::get('reset-password', [SendMailController::class, 'sendMail']);
 
+// Show reset password form
 Route::get('reset-password/{token}', [PasswordController::class, 'showResetForm'])->name('reset.password');
+
+// Handle password update
+Route::post('update-password', [PasswordController::class, 'updatePassword'])->name('update.password');
 
 Route::get('foods', [FoodController::class, 'foods']);
 Route::get('foods/{type}', [FoodController::class, 'food']);
