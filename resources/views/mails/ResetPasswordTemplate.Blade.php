@@ -75,6 +75,17 @@
         .footer p {
             margin: 0;
         }
+
+        @media only screen and (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+
+            .button {
+                width: 100%;
+                box-sizing: border-box;
+            }
+        }
     </style>
 </head>
 
@@ -84,10 +95,10 @@
             <h1>Jelszó visszaállítása</h1>
         </div>
         <div class="content">
-            <p>Üdvözöljük!</p>
+            <p>Üdvözöljük, {{ $mailData['user'] }}!</p>
             <p>Ezt az e-mailt azért kapta, mert jelszó-visszaállítási kérelmet kaptunk az Ön fiókjához.</p>
             <p>Kattintson az alábbi gombra a jelszó visszaállításához:</p>
-            <a href="http://localhost:8000/api/foods" class="button">Jelszó visszaállítása</a>
+            <a href="{{ route('reset.password', ['token' => $resetUrl]) }}" class="button">Jelszó visszaállítása</a>
             <p>Ha nem Ön kérte a jelszó visszaállítását, kérjük, hagyja figyelmen kívül ezt az e-mailt.</p>
             <p>Köszönjük,<br><strong>A Csapat</strong></p>
         </div>

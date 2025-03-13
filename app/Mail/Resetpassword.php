@@ -9,11 +9,11 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class Resetpassword extends Mailable
+class ResetPassword extends Mailable
 {
-    public $mailData;
-
     use Queueable, SerializesModels;
+
+    public $mailData;
 
     /**
      * Create a new message instance.
@@ -29,7 +29,7 @@ class Resetpassword extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Resetpassword',
+            subject: 'Jelszó visszaállítása',
         );
     }
 
@@ -38,8 +38,15 @@ class Resetpassword extends Mailable
      */
     public function content(): Content
     {
+        // A jelszó visszaállító URL létrehozása
+        $resetUrl = url('/reset-password/' . $this->mailData['token']); // A reset URL
+
         return new Content(
-            view: 'mails.ResetPasswordTemplate',
+            view: 'mails.ResetPasswordTemplate', // Az email sablon
+            with: [
+                'user' => $this->mailData['user'], // Felhasználó neve
+                'resetUrl' => $resetUrl, // A generált URL
+            ],
         );
     }
 
