@@ -19,9 +19,9 @@ return new class extends Migration
             $table->enum('dayOfWeek', ['Hétfő', 'Kedd', 'Szerda', 'Csütörtök', 'Péntek', 'Szombat', 'Vasárnap']);
             $table->enum('mealType', ['Reggeli', 'Ebéd', 'Vacsora', 'Nasi']);
             $table->time('time');
-            $table->float('quantity');
-            $table->float('dailyCalorieTarget');
-            $table->float('dailyProteinTarget');
+            $table->integer('quantity');
+            $table->integer('dailyCalorieTarget');
+            $table->integer('dailyProteinTarget');
         });
     }
 

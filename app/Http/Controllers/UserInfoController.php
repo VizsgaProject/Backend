@@ -25,15 +25,15 @@ class UserInfoController extends BaseController
         $validator = Validator::make(
             $input,
             [
-                'height' => 'required|regex:/^\d+(\.\d{1,2})?$/|min:50|max:250',
-                'weight' => 'required|regex:/^\d+(\.\d{1,2})?$/|min:30|max:300',
+                'height' => 'required|numeric|min:50|max:250',
+                'weight' => 'required|numeric|min:30|max:300',
             ],
             [
-                'height.required' => 'A magasság megadása kötelező.',
+                'height.numeric' => 'A magasság megadása kötelező.',
                 'height.regex' => 'A magasság formátuma érvénytelen. Példa: 170 vagy 170.5.',
                 'height.min' => 'A magasság nem lehet kisebb, mint 50 cm.',
                 'height.max' => 'A magasság nem lehet nagyobb, mint 250 cm.',
-                'weight.required' => 'A súly megadása kötelező.',
+                'weight.numeric' => 'A súly megadása kötelező.',
                 'weight.regex' => 'A súly formátuma érvénytelen. Példa: 70 vagy 70.25.',
                 'weight.min' => 'A súly nem lehet kisebb, mint 30 kg.',
                 'weight.max' => 'A súly nem lehet nagyobb, mint 300 kg.',
@@ -60,14 +60,14 @@ class UserInfoController extends BaseController
         $validator = Validator::make(
             $request->all(),
             [
-                'height' => 'nullable|regex:/^\d+(\.\d{1,2})?$/|min:50|max:250',
-                'weight' => 'nullable|regex:/^\d+(\.\d{1,2})?$/|min:30|max:300',
+                'height' => 'nullable|numeric|min:50|max:250',
+                'weight' => 'nullable|numeric|min:30|max:300',
             ],
             [
-                'height.regex' => 'A magasság formátuma érvénytelen. Példa: 170 vagy 170.5.',
+                'height.numeric' => 'A magasság formátuma érvénytelen. Példa: 170 vagy 170.5.',
                 'height.min' => 'A magasság nem lehet kisebb, mint 50 cm.',
                 'height.max' => 'A magasság nem lehet nagyobb, mint 250 cm.',
-                'weight.regex' => 'A súly formátuma érvénytelen. Példa: 70 vagy 70.25.',
+                'weight.numeric' => 'A súly formátuma érvénytelen. Példa: 70 vagy 70.25.',
                 'weight.min' => 'A súly nem lehet kisebb, mint 30 kg.',
                 'weight.max' => 'A súly nem lehet nagyobb, mint 300 kg.',
             ]

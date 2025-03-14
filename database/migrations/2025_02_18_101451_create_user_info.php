@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('userInfo', function (Blueprint $table) {
             $table->id();
-            $table->float('height');
-            $table->float('weight');
+            $table->integer('height');
+            $table->integer('weight');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->timestamps();
         });
