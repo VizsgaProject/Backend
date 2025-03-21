@@ -44,6 +44,7 @@ class AuthController extends BaseController
         );
 
         if ($validator->fails()) {
+            logger($validator->errors());
             return $this->sendError('Hibás adatok!', $validator->errors(), 400);
         }
 
