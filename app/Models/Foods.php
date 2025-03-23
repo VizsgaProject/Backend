@@ -15,7 +15,7 @@ class Foods extends Model
 
     protected $fillable = [
         'name',
-        'imng',
+        'img',
         'weight',
         'calories',
         'protein',
@@ -24,7 +24,7 @@ class Foods extends Model
         'type',
     ];
 
-    // 1 -> N
+    // 1 -> N kapcsolat a UserWeeklyFood modellhez
     public function userWeeklyFood()
     {
         return $this->hasMany(UserWeeklyFood::class);

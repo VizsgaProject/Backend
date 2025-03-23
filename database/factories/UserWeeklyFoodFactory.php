@@ -3,7 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\UserWeeklyFood;
-use App\Models\Foods;
+use App\Models\Foods; // Ensure this import exists
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class UserWeeklyFoodFactory extends Factory
@@ -13,8 +13,8 @@ class UserWeeklyFoodFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => \App\Models\User::factory(), // Kapcsolódó felhasználó
-            'foods_id' => Foods::factory(), // Kapcsolódó étel (Foods modell használata)
+            'user_id' => \App\Models\User::factory(),
+            'foods_id' => Foods::factory(), // This will now work
             'date' => $this->faker->date,
             'dayOfWeek' => $this->faker->randomElement(['Hétfő', 'Kedd', 'Szerda', 'Csütörtök', 'Péntek', 'Szombat', 'Vasárnap']),
             'mealType' => $this->faker->randomElement(['Reggeli', 'Ebéd', 'Vacsora', 'Nasi']),

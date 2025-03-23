@@ -13,5 +13,8 @@ abstract class TestCase extends BaseTestCase
         parent::setUp();
 
         $this->artisan('migrate:fresh', ['--env' => 'testing']);
+
+        $this->artisan('db:seed', ['--env' => 'testing']);
+
     }
 }
