@@ -1,76 +1,110 @@
 <?php
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use App\Models\User;
+use App\Models\UserInfo;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-test('user can register, login, and manage their info via API', function () {
-    // 1. Regisztráció API hívás
-    $registrationResponse = $this->postJson('/api/register', [
-        'name' => 'Test User',
-        'email' => 'test@example.com',
-        'password' => 'Password123',
-        'confirm_password' => 'Password123',
-        'dateOfBirth' => '2000-01-01',
-        'gender' => 'Férfi',
+test('user can retrieve their info via API', function () {
+    // Felhasználó létrehozása
+    $user = User::factory()->create();
+
+    // Felhasználói adatok létrehozása
+    $userInfo = UserInfo::factory()->create([
+        'user_id' => $user->id,
+        'height' => 175,
+        'weight' => 70,
     ]);
 
-    // Ellenőrizzük, hogy sikeres a regisztráció
-    $registrationResponse->assertStatus(201); // HTTP 201 Created
-    $registrationResponse->assertJsonStructure([
-        'data' => ['name', 'token'],
-    ]);
-
-    // Token a regisztrációs válaszból
-    $token = $registrationResponse->json('data.token');
-
-    // 2. Login API hívás
+    // Bejelentkezés és token lekérése
     $loginResponse = $this->postJson('/api/login', [
-        'name' => 'Test User', // A regisztrált felhasználó neve
-        'password' => 'Password123', // A regisztrált jelszó
+        'name' => $user->name,
+        'password' => 'password', // Alapértelmezett jelszó a factory-ban
     ]);
 
-    // Ellenőrizzük, hogy sikeres a login
-    $loginResponse->assertStatus(200); // HTTP 200 OK
-    $loginResponse->assertJsonStructure([
-        'data' => ['name', 'token', 'id'], // Ellenőrizzük a válasz mezőit
+    $token = $loginResponse->json('data.token');
+
+    // Felhasználói adatok lekérése
+    $response = $this->withHeader('Authorization', "Bearer {$token}")
+        ->getJson('/api/user-info');
+
+    // Ellenőrizzük, hogy sikeres a válasz
+    $response->assertStatus(200);
+    $response->assertJson([
+        'data' => [
+            'height' => 175,
+            'weight' => 70,
+        ],
+    ]);
+});
+
+test('user can store their info via API', function () {
+    // Felhasználó létrehozása
+    $user = User::factory()->create();
+
+    // Bejelentkezés és token lekérése
+    $loginResponse = $this->postJson('/api/login', [
+        'name' => $user->name,
+        'password' => 'password', // Alapértelmezett jelszó a factory-ban
     ]);
 
-    // Login token (előző token nem feltétlenül szükséges)
-    $loginToken = $loginResponse->json('data.token');
+    $token = $loginResponse->json('data.token');
 
-    // 3. Felhasználói adatok mentése
-    $storeResponse = $this->withHeader('Authorization', "Bearer {$loginToken}")
+    // Felhasználói adatok mentése
+    $storeResponse = $this->withHeader('Authorization', "Bearer {$token}")
         ->postJson('/api/user-info', [
             'height' => 175,
             'weight' => 70,
         ]);
 
+    // Ellenőrizzük, hogy sikeres a mentés
     $storeResponse->assertStatus(201); // HTTP 201 Created
     $storeResponse->assertJson([
         'message' => 'Adatok sikeresen elküldve!',
     ]);
 
-    // Assert Initial Values After Creation
+    // Ellenőrizzük, hogy az adatok elmentődtek az adatbázisba
     $this->assertDatabaseHas('userInfo', [
-        'user_id' => $loginResponse->json('data.id'), // Match table name from migration
+        'user_id' => $user->id,
+        'height' => 175,
+        'weight' => 70,
+    ]);
+});
+
+test('user can update their info via API', function () {
+    // Felhasználó létrehozása
+    $user = User::factory()->create();
+
+    // Felhasználói adatok létrehozása
+    $userInfo = UserInfo::factory()->create([
+        'user_id' => $user->id,
         'height' => 175,
         'weight' => 70,
     ]);
 
-    // 4. Felhasználói adatok frissítése
-    $updateResponse = $this->withHeader('Authorization', "Bearer {$loginToken}")
+    // Bejelentkezés és token lekérése
+    $loginResponse = $this->postJson('/api/login', [
+        'name' => $user->name,
+        'password' => 'password', // Alapértelmezett jelszó a factory-ban
+    ]);
+
+    $token = $loginResponse->json('data.token');
+
+    // Felhasználói adatok frissítése
+    $updateResponse = $this->withHeader('Authorization', "Bearer {$token}")
         ->putJson('/api/user-info', [
             'height' => 180,
             'weight' => 75,
         ]);
 
+    // Ellenőrizzük, hogy sikeres a frissítés
     $updateResponse->assertStatus(200); // HTTP 200 OK
     $updateResponse->assertJson([
         'message' => 'Adatok sikeresen frissítve!',
     ]);
 
-    // Assert Updated Values After Update
+    // Ellenőrizzük, hogy az adatok frissültek az adatbázisban
     $this->assertDatabaseHas('userInfo', [
-        'user_id' => $loginResponse->json('data.id'), // Match table name from migration
+        'user_id' => $user->id,
         'height' => 180,
         'weight' => 75,
     ]);

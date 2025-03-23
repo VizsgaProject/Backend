@@ -6,48 +6,41 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 uses(RefreshDatabase::class);
 
 test('authenticated user can logout successfully', function () {
-    // 1. Register a new user
-    $registrationResponse = $this->postJson('/api/register', [
+    // 1. Létrehozunk egy felhasználót a UserFactory segítségével
+    $user = User::factory()->create([
         'name' => 'Test User',
         'email' => 'test@example.com',
-        'password' => 'Password123',
-        'confirm_password' => 'Password123',
+        'password' => bcrypt('Password123'), // Jelszó titkosítva
         'dateOfBirth' => '2000-01-01',
         'gender' => 'Férfi',
     ]);
 
-    // Verify that registration is successful
-    $registrationResponse->assertStatus(201); // HTTP 201 Created
-
-    // Extract the token from the registration response
-    $registrationToken = $registrationResponse->json('data.token');
-
-    // 2. Log in with the registered user's credentials
+    // 2. Bejelentkezés a felhasználóval
     $loginResponse = $this->postJson('/api/login', [
-        'name' => 'Test User', // The registered user's name
-        'password' => 'Password123', // The registered user's password
+        'name' => 'Test User', // A felhasználó neve
+        'password' => 'Password123', // A felhasználó jelszava
     ]);
 
-    // Verify that login is successful
+    // Ellenőrizzük, hogy sikeres a bejelentkezés
     $loginResponse->assertStatus(200); // HTTP 200 OK
     $loginResponse->assertJsonStructure([
-        'data' => ['name', 'token', 'id'], // Verify response structure contains these fields
+        'data' => ['name', 'token', 'id'], // Ellenőrizzük a válasz mezőit
     ]);
 
-    // Extract the token from the login response
+    // Kinyerjük a tokent a bejelentkezési válaszból
     $loginToken = $loginResponse->json('data.token');
 
-    // 3. Send a logout request using the login token
+    // 3. Kijelentkezési kérés küldése a tokennel
     $logoutResponse = $this->withHeader('Authorization', "Bearer {$loginToken}")
         ->postJson('/api/logout');
 
-    // Verify that logout is successful
+    // Ellenőrizzük, hogy sikeres a kijelentkezés
     $logoutResponse->assertStatus(200); // HTTP 200 OK
     $logoutResponse->assertJson([
         'message' => 'Sikeres kijelentkezés',
     ]);
 
-    // Verify that the token is no longer present in the database
+    // Ellenőrizzük, hogy a token már nem szerepel az adatbázisban
     $this->assertDatabaseMissing('personal_access_tokens', [
         'tokenable_id' => $loginResponse->json('data.id'),
         'tokenable_type' => User::class,

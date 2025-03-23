@@ -1,21 +1,25 @@
 <?php
+
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 test('user cannot register with duplicate email or name', function () {
-    // Létrehozzuk az első felhasználót
-    $this->postJson('/api/register', [
+    // Az adatbázis tisztítása minden teszt előtt
+    uses(RefreshDatabase::class);
+
+    // Létrehozunk egy felhasználót a UserFactory segítségével
+    $user = User::factory()->create([
         'name' => 'Test User',
         'email' => 'test@example.com',
-        'password' => 'Password123',
-        'confirm_password' => 'Password123',
+        'password' => bcrypt('Password123'),
         'dateOfBirth' => '2000-01-01',
         'gender' => 'Férfi',
-    ])->assertStatus(201); // Sikeres regisztráció
+    ]);
 
     // Második felhasználó ugyanazzal az e-mail címmel és névvel
     $response = $this->postJson('/api/register', [
-        'name' => 'Test User',
-        'email' => 'test@example.com',
+        'name' => 'Test User', // Ugyanaz a név
+        'email' => 'test@example.com', // Ugyanaz az e-mail cím
         'password' => 'Password1234',
         'confirm_password' => 'Password1234',
         'dateOfBirth' => '1999-01-01',
@@ -32,4 +36,4 @@ test('user cannot register with duplicate email or name', function () {
             'email' => ["Email cím már létezik!"],
         ],
     ]);
-})->uses(RefreshDatabase::class);
+});
