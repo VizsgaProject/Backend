@@ -3,7 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\UserWeeklyFood;
-use App\Models\Foods; // Ensure this import exists
+use App\Models\Foods;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class UserWeeklyFoodFactory extends Factory

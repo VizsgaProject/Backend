@@ -34,7 +34,7 @@ test('user can store a new weekly food', function () {
 
     // Define food data for storing
     $foodData = [
-        'foods_id' => 1,  // használjuk a helyes mezőt, ami 'foods_id'
+        'foods_id' => 1,
         'date' => '2025-03-23',
         'dayOfWeek' => 'Hétfő',
         'mealType' => 'Reggeli',

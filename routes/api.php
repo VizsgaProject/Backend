@@ -57,11 +57,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('user-weekly-foods/{id}', [UserWeeklyFoodsController::class, 'update']); // PUT - update weekly food
     Route::delete('user-weekly-foods/{id}', [UserWeeklyFoodsController::class, 'destroy']); // DELETE - delete weekly food
 
-
     // Weekly Workouts Routes
     Route::get('user-weekly-workouts', [UserWeeklyWorkoutController::class, 'index']); // GET - retrieve all weekly workouts
     Route::post('user-weekly-workouts', [UserWeeklyWorkoutController::class, 'store']); // POST - store new weekly workout
     Route::put('user-weekly-workouts/{id}', [UserWeeklyWorkoutController::class, 'update']); // PUT - update weekly workout
     Route::delete('user-weekly-workouts/{id}', [UserWeeklyWorkoutController::class, 'destroy']); // DELETE - delete weekly workout
-
 });

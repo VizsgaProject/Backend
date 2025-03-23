@@ -5,29 +5,29 @@ use App\Models\UserInfo;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 test('user can retrieve their info via API', function () {
-    // Felhasználó létrehozása
+    // Create a user
     $user = User::factory()->create();
 
-    // Felhasználói adatok létrehozása
+    // Create user info
     $userInfo = UserInfo::factory()->create([
         'user_id' => $user->id,
         'height' => 175,
         'weight' => 70,
     ]);
 
-    // Bejelentkezés és token lekérése
+    // Log in and get the token
     $loginResponse = $this->postJson('/api/login', [
         'name' => $user->name,
-        'password' => 'password', // Alapértelmezett jelszó a factory-ban
+        'password' => 'password', // Default password in the factory
     ]);
 
     $token = $loginResponse->json('data.token');
 
-    // Felhasználói adatok lekérése
+    // Retrieve user info
     $response = $this->withHeader('Authorization', "Bearer {$token}")
         ->getJson('/api/user-info');
 
-    // Ellenőrizzük, hogy sikeres a válasz
+    // Verify the response is successful
     $response->assertStatus(200);
     $response->assertJson([
         'data' => [
@@ -38,31 +38,31 @@ test('user can retrieve their info via API', function () {
 });
 
 test('user can store their info via API', function () {
-    // Felhasználó létrehozása
+    // Create a user
     $user = User::factory()->create();
 
-    // Bejelentkezés és token lekérése
+    // Log in and get the token
     $loginResponse = $this->postJson('/api/login', [
         'name' => $user->name,
-        'password' => 'password', // Alapértelmezett jelszó a factory-ban
+        'password' => 'password', // Default password in the factory
     ]);
 
     $token = $loginResponse->json('data.token');
 
-    // Felhasználói adatok mentése
+    // Store user info
     $storeResponse = $this->withHeader('Authorization', "Bearer {$token}")
         ->postJson('/api/user-info', [
             'height' => 175,
             'weight' => 70,
         ]);
 
-    // Ellenőrizzük, hogy sikeres a mentés
+    // Verify the data is successfully stored
     $storeResponse->assertStatus(201); // HTTP 201 Created
     $storeResponse->assertJson([
-        'message' => 'Adatok sikeresen elküldve!',
+        'message' => 'Data successfully submitted!',
     ]);
 
-    // Ellenőrizzük, hogy az adatok elmentődtek az adatbázisba
+    // Verify the data is saved in the database
     $this->assertDatabaseHas('userInfo', [
         'user_id' => $user->id,
         'height' => 175,
@@ -71,38 +71,38 @@ test('user can store their info via API', function () {
 });
 
 test('user can update their info via API', function () {
-    // Felhasználó létrehozása
+    // Create a user
     $user = User::factory()->create();
 
-    // Felhasználói adatok létrehozása
+    // Create user info
     $userInfo = UserInfo::factory()->create([
         'user_id' => $user->id,
         'height' => 175,
         'weight' => 70,
     ]);
 
-    // Bejelentkezés és token lekérése
+    // Log in and get the token
     $loginResponse = $this->postJson('/api/login', [
         'name' => $user->name,
-        'password' => 'password', // Alapértelmezett jelszó a factory-ban
+        'password' => 'password', // Default password in the factory
     ]);
 
     $token = $loginResponse->json('data.token');
 
-    // Felhasználói adatok frissítése
+    // Update user info
     $updateResponse = $this->withHeader('Authorization', "Bearer {$token}")
         ->putJson('/api/user-info', [
             'height' => 180,
             'weight' => 75,
         ]);
 
-    // Ellenőrizzük, hogy sikeres a frissítés
+    // Verify the data is successfully updated
     $updateResponse->assertStatus(200); // HTTP 200 OK
     $updateResponse->assertJson([
-        'message' => 'Adatok sikeresen frissítve!',
+        'message' => 'Data successfully updated!',
     ]);
 
-    // Ellenőrizzük, hogy az adatok frissültek az adatbázisban
+    // Verify the data is updated in the database
     $this->assertDatabaseHas('userInfo', [
         'user_id' => $user->id,
         'height' => 180,

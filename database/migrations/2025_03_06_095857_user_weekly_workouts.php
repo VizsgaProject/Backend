@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('user_weekly_workouts', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('workout_id')->constrained()->onDelete('cascade');
+            $table->foreignId('workouts_id')->constrained()->onDelete('cascade'); // Change this to 'workouts_id'
             $table->enum('dayOfWeek', ['Hétfő', 'Kedd', 'Szerda', 'Csütörtök', 'Péntek', 'Szombat', 'Vasárnap']);
             $table->integer('sets');
             $table->integer('reps');
