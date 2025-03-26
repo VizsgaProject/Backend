@@ -22,7 +22,7 @@ class WorkoutFactory extends Factory
     public function definition()
     {
         return [
-            'muscleGroup' => $this->faker->randomElement(['Chest', 'Back', 'Legs', 'Arms', 'Shoulders', 'Abs']), // Random muscle group
+            'muscleGroup' => $this->faker->randomElement(['Mellkas', 'Hát', 'Lábak', 'Karok', 'Vállak', 'Has']), // Random muscle group
             'name' => $this->faker->word, // Random name
             'img' => $this->faker->imageUrl(), // Random image URL
             'description' => $this->faker->sentence, // Random description

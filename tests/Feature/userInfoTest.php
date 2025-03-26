@@ -59,7 +59,7 @@ test('user can store their info via API', function () {
     // Verify the data is successfully stored
     $storeResponse->assertStatus(201); // HTTP 201 Created
     $storeResponse->assertJson([
-        'message' => 'Data successfully submitted!',
+        'message' => 'Adatok sikeresen elküldve!',
     ]);
 
     // Verify the data is saved in the database
@@ -99,7 +99,7 @@ test('user can update their info via API', function () {
     // Verify the data is successfully updated
     $updateResponse->assertStatus(200); // HTTP 200 OK
     $updateResponse->assertJson([
-        'message' => 'Data successfully updated!',
+        'message' => 'Adatok sikeresen frissítve!',
     ]);
 
     // Verify the data is updated in the database

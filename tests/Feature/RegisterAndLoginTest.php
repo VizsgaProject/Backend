@@ -10,7 +10,7 @@ test('user can register and login via API', function () {
         'password' => 'Password123',
         'confirm_password' => 'Password123',
         'dateOfBirth' => '2000-01-01',
-        'gender' => 'Male',
+        'gender' => 'Férfi',
     ]);
 
     // Verify that the registration is successful

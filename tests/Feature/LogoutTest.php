@@ -37,7 +37,7 @@ test('authenticated user can logout successfully', function () {
     // Verify that the logout was successful
     $logoutResponse->assertStatus(200); // HTTP 200 OK
     $logoutResponse->assertJson([
-        'message' => 'Logout successful',
+        'message' => 'Sikeres kijelentkezés',
     ]);
 
     // Verify that the token no longer exists in the database
