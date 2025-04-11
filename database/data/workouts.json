@@ -163,7 +163,7 @@
         "id": 21,
         "MuscleGroup": "Vállak",
         "Name": "Dumbbell Lateral Raise / Súlyzós oldalemelés",
-        "Img": "",
+        "Img": "https://liftmanual.com/wp-content/uploads/2023/04/dumbbell-rear-lateral-raise.jpg",
         "Description": "A lábtoló gépen végzett gyakorlat segít fejleszteni a quadriceps, a fenék és a combizmokat. Ülj a géphez, lábait a talpra helyezd. Nyomd el a súlyt a lábaddal, majd lassan eressz vissza a kezdőpozícióba.",
         "Equipment": "Lábtoló gép"
     },
@@ -178,10 +178,10 @@
     {
         "id": 23,
         "MuscleGroup": "Vállak",
-        "Name": "Vállkiemelés",
-        "Img": "",
-        "Description": "A vállkiemelés a váll izmainak fejlesztésére szolgáló gyakorlat, amit súlyzóval végezhetünk. Állj két lábon, vállszélességben. Tartsd a súlyzókat oldalt. Emeld fel a súlyzókat a vállaid magasságába, majd lassan eressz le őket a kezdőpozícióba.",
-        "Equipment": "Súlyzó"
+        "Name": "Kábel keresztirányú vállemelés",
+        "Img": "https://www.lyfta.app/_next/image?url=https%3A%2F%2Flyfta.app%2Fimages%2Fexercises%2F37191101.png&w=3840&q=20",
+        "Description": " Ez a gyakorlat az oldalsó vállizmokat (medialis deltoidokat) célozza meg. Állj egyenesen egy kábelkeresztező gép közepén, a fogantyúkat keresztben fogd meg (jobb kézzel a bal oldali, bal kézzel a jobb oldali kábel). A mozdulat során emeld karjaidat oldalra, vállmagasságig, majd lassan térj vissza a kiinduló helyzetbe. Ügyelj arra, hogy a mozdulat kontrollált legyen, és kerüld a lendítést.",
+        "Equipment": "Kábelkeresztező gép."
     },
     {
         "id": 24,
@@ -467,7 +467,7 @@
         "id": 59,
         "MuscleGroup": "Vállak",
         "Name": "Arnold súlyzós nyomás",
-        "Img": "",
+        "Img": "https://www.lyfta.app/_next/image?url=%2Fthumbnails%2F21371201.jpg&w=3840&q=75",
         "Description": "A vállhúzás a váll izmait célozza, miközben erősíti a hátat és javítja a testtartást. Állj két lábon, vállszélességben. Fogd meg a súlyzókat két kézzel, vállszélességben. Húzd vissza a súlyzókat a tested felé, majd lassan eressz vissza a kezdőpozícióba.",
         "Equipment": "Kábeles gép"
     },
@@ -515,7 +515,7 @@
         "id": 65,
         "MuscleGroup": "Vállak",
         "Name": "Vállprés",
-        "Img": "",
+        "Img": "https://www.lyfta.app/_next/image?url=https%3A%2F%2Flyfta.app%2Fimages%2Fexercises%2F31221101.png&w=3840&q=20",
         "Description": "A vállprés a vállak teljes körű erősítésére szolgál, különösen a váll izmainak fejlesztésére. Ülj egy padra, a súlyzókat a vállaid magasságában tartva. Nyomd fel a súlyt felfelé, majd lassan eressz le a kezdőpozícióba.",
         "Equipment": "Súlyzó"
     },
@@ -547,16 +547,16 @@
         "id": 69,
         "MuscleGroup": "Karok",
         "Name": "Tricepsz tolódzkodás",
-        "Img": "",
+        "Img": "https://gyuras.hu/wp-content/uploads/2023/10/tolodzkodas-padon.gif",
         "Description": "A tolódzkodás a tricepsz és a váll izmainak fejlesztésére szolgál, miközben a törzset is dolgoztatja. Fogd meg a párhuzamos rudakat két kézzel, vállszélességben. Emeld fel a testet, majd lassan eressz le magad a kezdőpozícióba.",
         "Equipment": "Nincs"
     },
     {
         "id": 70,
         "MuscleGroup": "Has",
-        "Name": "Helyben futás",
-        "Img": "",
-        "Description": "A helyben futás segít az állóképesség növelésében és a hasizmok erősítésében. Állj két lábon, vállszélességben. Futkározz helyben, mozgatva a karjaidat és a lábakat.",
+        "Name": "Orosz Twist ",
+        "Img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyBDWRi43bo856ucm4E3v9CRsZoNiAqJvT3w&s",
+        "Description": "Ez a gyakorlat a ferde hasizmokat és a core stabilitását fejleszti. Ülj le a talajra, hajlítsd be a térdeidet, és emeld fel a lábaidat úgy, hogy ne érjenek a földhöz. Tartsd egyenesen a hátadat, és enyhén dőlj hátra, hogy megtaláld az egyensúlyod. Fogj egy súlyt vagy labdát (opcionális), és a törzsedet egyik oldalról a másikra fordítva érintsd a földet az adott oldalon. Tartsd a mozgást kontrolláltan, és ügyelj arra, hogy a törzsed végezze a fordulást, ne csak a karjaid.",
         "Equipment": "Nincs"
     },
     {
