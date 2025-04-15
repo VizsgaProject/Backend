@@ -7,7 +7,7 @@
     <title>Jelszó Visszaállítás</title>
     <style>
         body {
-            background-color: #121212;
+            background-color: #1e2939;
             color: #E0E0E0;
             font-family: Arial, sans-serif;
             margin: 0;
@@ -62,7 +62,7 @@
 
         button {
             padding: 12px 24px;
-            background-color: #00ADB5;
+            background-color: #008B96;
             color: white;
             border: none;
             border-radius: 5px;
@@ -79,7 +79,7 @@
         }
 
         .container {
-            background-color: #1E1E1E;
+            background-color: #101828;
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
