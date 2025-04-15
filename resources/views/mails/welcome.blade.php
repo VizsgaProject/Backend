@@ -19,7 +19,7 @@
             margin: 0 auto;
             color: #ffffff;
             padding: 20px;
-            background-color: #1c1c1c;
+            background-color: #101828;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
@@ -52,7 +52,7 @@
             display: inline-block;
             margin: 20px 0;
             padding: 12px 24px;
-            background-color: #00ADB5;
+            background-color: #008B96;
             color: #ffffff;
             text-decoration: none;
             border-radius: 6px;

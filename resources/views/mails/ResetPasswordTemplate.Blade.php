@@ -8,7 +8,7 @@
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #1C1C1C;
+            background-color: #364153;
             margin: 0;
             padding: 0;
             color: white;
@@ -17,7 +17,7 @@
         .container {
             max-width: 600px;
             margin: 50px auto;
-            background-color: #1C1C1C;
+            background-color: #101828;
             padding: 40px;
             border-radius: 12px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -50,7 +50,7 @@
             display: inline-block;
             margin: 20px 0;
             padding: 12px 24px;
-            background-color: #00ADB5;
+            background-color: #008B96;
             color: #ffffff;
             text-decoration: none;
             border-radius: 6px;
