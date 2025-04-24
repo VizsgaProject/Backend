@@ -23,7 +23,7 @@ Route::post('login', [AuthController::class, 'login']);
 
 //reset password
 // Send reset password link
-Route::get('reset-password', [SendMailController::class, 'sendMail']);
+Route::post('reset-password', [SendMailController::class, 'sendMail']);
 
 // Show reset password form
 Route::get('reset-password/{token}', [PasswordController::class, 'showResetForm'])->name('reset.password');
