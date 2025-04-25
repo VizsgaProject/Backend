@@ -43,6 +43,6 @@ class PasswordController extends Controller
         $user->reset_password_token = null; // Clear the token
         $user->save();
 
-        return redirect()->route('login')->with('success', 'Your password has been reset successfully.');
+        // return redirect()->route('login')->with('success', 'Your password has been reset successfully.');
     }
 }
