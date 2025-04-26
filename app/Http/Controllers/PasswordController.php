@@ -34,8 +34,7 @@ class PasswordController extends Controller
             ->first();
 
         if (!$user) {
-            return redirect()->route('reset.password', ['token' => $request->token])
-                ->with('error', 'Invalid email or token.');
+            return back()->with('error', 'Invalid email or token.');
         }
 
         // Update the user's password
@@ -43,6 +42,8 @@ class PasswordController extends Controller
         $user->reset_password_token = null; // Clear the token
         $user->save();
 
-        // return redirect()->route('login')->with('success', 'Your password has been reset successfully.');
+        // Redirect to the Vue.js frontend login page
+        return redirect('http://localhost:5173/Belepes')
+            ->with('success', 'Jelszava sikeresen visszaállításra került.');
     }
 }
